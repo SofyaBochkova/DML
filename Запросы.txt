@@ -1,0 +1,22 @@
+select first 50 MAN.name,SURNAME from MAN where COUNTRY in (2,3);
+select FILM.name,duration from FILM where duration between 45 and 90;
+select FILM.name,budget from FILM where budget<3000000;
+select count(FILM.name,budget) from FILM where budget<3000000;
+
+select * from COMPANY order by COMPANY.name asc, year_of_foundation desc;
+
+select from sum(MONEY),avg(MONEY),max(MONEY) from MONEY;
+select first 5 MAN.NAME,MAN.SURNAME from MAN,GANORAR,MONEY where MAN.MAN_ID=GANORAR.MAN_ID and GANORAR.MONEY_ID=MONEY.MONEY_ID;
+
+select FILM.name,sum(budget) from FILM group by FILM.name having sum(bidget)>1000000;
+
+update 
+
+
+select first 5 FILM.name,year_of_creation,sum(MONEY) from film,prokat where year_of_creation between 2005 and 2015 group by FILM.name,FILM.year_of_creation order by sum(MONEY) desc;
+
+select MAN.NAME,MAN.SURNAME from MAN,GANORAR,MONEY where MAN.MAN_ID=GANORAR.MAN_ID and
+GANORAR.MONEY_ID=MONEY.MONEY_ID and MAN.MAN_ID in (select first 5 GANORAR.MAN_ID from
+GANORAR,MONEY where GANORAR.MONEY_ID=MONEY.MONEY_ID group by GANORAR.MAN_ID order by sum(MON_MAN) asc);
+
+delete from GENRE where ID not in (select GENRE_ID from STYLE);
