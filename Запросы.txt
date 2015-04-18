@@ -2,21 +2,30 @@ select first 50 MAN.name,SURNAME from MAN where COUNTRY in (2,3);
 select FILM.name,duration from FILM where duration between 45 and 90;
 select FILM.name,budget from FILM where budget<3000000;
 select count(FILM.name,budget) from FILM where budget<3000000;
-
 select * from COMPANY order by COMPANY.name asc, year_of_foundation desc;
-
-select from sum(MONEY),avg(MONEY),max(MONEY) from MONEY;
-select first 5 MAN.NAME,MAN.SURNAME from MAN,GANORAR,MONEY where MAN.MAN_ID=GANORAR.MAN_ID and GANORAR.MONEY_ID=MONEY.MONEY_ID;
-
+select sum(money_of_prokat),avg(money_of_prokat),max(money_of_prokat) from COMPANY;
+select first 5 MAN.NAME,MAN.SURNAME from MAN,PART,COMPANY
+where MAN.MAN_ID=PART.MAN_ID and ROLE _ID=3;
 select FILM.name,sum(budget) from FILM group by FILM.name having sum(bidget)>1000000;
+INSERT INTO soundtrack(sound_id,name,author,film,duration) VALUES(4,ТCrazyТ,9,5,Т03:45Т);
+select SOUND_ID,SOUNDTRACK.name,film from SOUNDTRACK;
 
-update 
+update SOUNDTRACK set FILM= 2 where FILM =3;
+commit;
+select SOUND_ID,SOUNDTRACK.name,film from SOUNDTRACK;
+
+delete from FILM where BUDGET =(select BUDGET from FILM group by BUDGET order by sum(FILM) desc);
+
+delete from GENRE where ID not in (select GENRE_ID from STYLE);
 
 
-select first 5 FILM.name,year_of_creation,sum(MONEY) from film,prokat where year_of_creation between 2005 and 2015 group by FILM.name,FILM.year_of_creation order by sum(MONEY) desc;
+/*»ндивидульные задани€*/
+select first 5 FILM.name,year_of_creation,sum(MONEY_OF_PROKAT) from film,company 
+where year_of_creation between 2005 and 2015 group by FILM.name,FILM.year_of_creation order by sum(MONEY_OF_PROKAT) desc;
 
-select MAN.NAME,MAN.SURNAME from MAN,GANORAR,MONEY where MAN.MAN_ID=GANORAR.MAN_ID and
-GANORAR.MONEY_ID=MONEY.MONEY_ID and MAN.MAN_ID in (select first 5 GANORAR.MAN_ID from
-GANORAR,MONEY where GANORAR.MONEY_ID=MONEY.MONEY_ID group by GANORAR.MAN_ID order by sum(MON_MAN) asc);
+select MAN.NAME,MAN.SURNAME,GANORAR from MAN,PART  where MAN.MAN_ID=PART.MAN_ID and
+ROLE_ID=3  and MAN.MAN_ID in (select first 10 PART.MAN_ID from
+PART  where ROLE_ID=3  group by PART.MAN_ID order by sum(GANORAR) asc);
+
 
 delete from GENRE where ID not in (select GENRE_ID from STYLE);
